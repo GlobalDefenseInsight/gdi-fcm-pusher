@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "global-defense-insight",
+  "private_key_id": "2d9f60d58855418b326396514abbf55ddf9c0f78",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDZhpLyJ8wjeJ7r\nUQG8dERfUqcUcLNaJY2UdTp+G5s0rS+rjU9Tx5XZFBGQbBnZtnhq6qiI+9wK2RET\n0VdbWpxyNBjk8l/vLaog8QNi5tKWqFk8v92H1oTdVSbZq5RUEP5TYeT0kiXpmrz7\nljGWmMl7rfJQt6wv8ERzCyiDMClUsvxcyDSBhFsfnlEhMsc5CY0/GpLCh0y+0JCR\nhXrvNKQPnQf3YtitTQgIHHEGkXjF/WuthODSXI0CHiyToD0hLwLDykJxw0dNp963\nDlIYpGlqCY4hWCTeILQsoqDKCu49bfLdDdVIbygFgdVOGUCsSHJDm9DHGdU/sZDN\nRdQlTr+/AgMBAAECggEAYJi5Qp3XslzLPbZgbf63qhj7J0GQ89Q/VhDk48GAn9jU\nlXsQIiU8bwTRc+/9XsgAG4KPSx2FLrAMPF+3SlMnrDNkZq8XWRBPP4enuFDGba7e\nyfJt/veNUviQYxMlsFtHhWGwmccY3O8hQxwEc1rwBmNNevjFlxg8XVY0LGXDxN9Q\nmwfiTL8OsD874HSFT0Gvyd1A0ETh9mkdgmXFiQ9QJknd23Fi3BIMjkY3gz1s5R1M\nCUMpB1oZKJcCti9MJdzQ4KdHUzzlM/6oBQGTm9Qf0r+pOgpx4rWyktptfB/IpdVu\n+4IEroOsCwKuCp7DF0eh0RPlnfOtZdd6q9akQO/Y4QKBgQD/0zIIG0jjp8YEhR+m\ngo54boQZYYg78qZM7vRvut1OAWEj3lS78+t0Udjbk0SVBnqLAdQRo73ez2OON7Mk\n2AOe8OFY00sFtuMuV+DaXyTVZFgtQg2QZP9xqPkNqqML9WbG15Aw+cuEg2wCFYl1\nYZAXMx1qAQztFt5BBsYF7HUurwKBgQDZrKvBurWQnT0l89UUl+ncsHRSHcA/tvKX\nxH3Zyb+WrVMRbncqDi3Akgrra/2662T+v85hSy4ydnWXTX3D8e+8RFiZldju1XqL\nYJjtXQQUonvD0O4GhnOFTxPtplkgKsDJBOSDbjlJN2pgBXlo8skYJPciS6ENREVn\njJKTfhpD8QKBgEIALsxAndF+G2xXHA9NZ4xSluola4xr0dPPYmjhAO97E6C5X4sO\nJxTfeN9NY0g/X6Y1Vo0mfXnab4jlfeZnhKeg5cKQ4K4cvQfbzDsKiOo09TrX67/x\nDqY4Pej0uRQAv/9U5fJ8v7D0Zw0ymUAbZ51UpqYOl1Mjrzt/j98/XgwpAoGBANTr\nEqKQKFOJiquaA35+TjIho9ZC5a8tG8SaXePvdOlFJvDxFbzcW6J2+Blp66mv4X1S\nTuRabpjLyKA0G2XUPITycZvhuG1+Ab1dwpjDmF86xEc5EeruDweB32NhiOJvD15R\n29g3s+9LNlEwaZ7fhRaJ6fbw9VsNwbnVBfchrT1xAoGAQJkdynZ9mReQ5Umm2Zv4\n1/aYBhSO02OIq0ID1inV+NJvmYwA4nFDaYHSlbQt1UStg2BWoHUCDAqDCnfg+BMn\nJQq0yaZuOTN80WDg5Bh1vDoThzcpIHbDuqZne+TlQM5ChztWH1uHHBkge39THJjS\nv3jLG1zBEnBDuSZ4Zuda7Jc=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-fbsvc@global-defense-insight.iam.gserviceaccount.com",
+  "client_id": "109564485518706044838",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40global-defense-insight.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
