@@ -44,7 +44,7 @@ message = {
     "message": {
         "topic": TOPIC,
         "notification": {
-            "title": "📰 New Post on GDI",
+            "title": "📰 New Post on Global Defense Insight",
             "body": title
         },
         "data": {
@@ -65,3 +65,4 @@ print("🔔 Notification sent:", response.status_code, response.text)
 # Save new post ID
 with open("last_post_id.txt", "w") as f:
     f.write(str(post_id))
+
