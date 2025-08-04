@@ -3,11 +3,15 @@ name: Send FCM Notification
 on:
   schedule:
     - cron: '*/5 * * * *'  # every 5 minutes
-  workflow_dispatch:       # allows manual run from GitHub UI
+  workflow_dispatch:      # allows manual run from GitHub UI
 
 jobs:
   notify:
     runs-on: ubuntu-latest
+
+    # Set permissions for the GITHUB_TOKEN to allow committing changes
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -25,5 +29,17 @@ jobs:
         run: |
           printf "%s" "${{ secrets.FCM_SERVICE_ACCOUNT_BASE64 }}" | base64 -d > service_account.json
 
-      - name: Run notification script
+      - name: Run notification script and save state
         run: python send_notification.py
+
+      - name: Commit and push state file
+        run: |
+          # Configure git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # Add, commit, and push the state file.
+          # The '|| echo "No changes to commit"' part prevents the workflow from failing if no new posts were found.
+          git add last_post.json
+          git commit -m "Update last post state [skip ci]" || echo "No new post found."
+          git push
