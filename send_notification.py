@@ -12,23 +12,25 @@ SCOPES = ["https://www.googleapis.com/auth/firebase.messaging"]
 
 # Load service account JSON from secret
 SERVICE_ACCOUNT_FILE = "service_account.json"
+STATE_FILE = "last_post.json"
 
-# Load last sent post ID and timestamp
+# Load last sent post ID and timestamp from a JSON file
+state = {}
 try:
-    with open("last_post_id.txt", "r") as f:
-        last_id = int(f.read().strip())
-    with open("last_post_timestamp.txt", "r") as f:
-        last_timestamp_str = f.read().strip()
+    with open(STATE_FILE, "r") as f:
+        state = json.load(f)
+        last_id = state.get("last_id", 0)
+        last_timestamp_str = state.get("last_timestamp", "1970-01-01T00:00:00+00:00")
         last_timestamp = datetime.datetime.fromisoformat(last_timestamp_str)
-except (FileNotFoundError, ValueError):
-    # Initialize if files don't exist or are invalid
+except (FileNotFoundError, json.JSONDecodeError, ValueError):
+    # Initialize if file doesn't exist or is invalid
     last_id = 0
     last_timestamp = datetime.datetime.min
 
 # Check latest post from WordPress
 try:
     res = requests.get("https://defensetalks.com/wp-json/wp/v2/posts?per_page=1")
-    res.raise_for_status() # Raise an exception for bad status codes
+    res.raise_for_status()
     posts = res.json()
     if not posts:
         print("No posts found from WordPress.")
@@ -37,33 +39,25 @@ try:
     post = posts[0]
     post_id = post["id"]
     title = post["title"]["rendered"]
-    post_timestamp_str = post["modified_gmt"] # 'modified_gmt' is a reliable timestamp
+    post_timestamp_str = post["modified_gmt"]
     post_timestamp = datetime.datetime.fromisoformat(post_timestamp_str)
 
-except requests.exceptions.RequestException as e:
-    print(f"Error fetching posts: {e}")
-    exit()
-except (KeyError, IndexError) as e:
-    print(f"Error parsing post data: {e}")
+except (requests.exceptions.RequestException, KeyError, IndexError, ValueError) as e:
+    print(f"Error: {e}")
     exit()
 
-# ✅ New and improved logic
-# Check if the post is newer than the last one we sent a notification for.
-# Using both ID and timestamp makes this check very robust.
+# Check if the post is newer
 if post_id == last_id and post_timestamp <= last_timestamp:
     print("No new post since the last check.")
     exit()
 
-# Authenticate with service account
+# Authenticate and send notification
 credentials = service_account.Credentials.from_service_account_file(
     SERVICE_ACCOUNT_FILE, scopes=SCOPES
 )
 credentials.refresh(Request())
 
-# FCM endpoint
 url = f"https://fcm.googleapis.com/v1/projects/{PROJECT_ID}/messages:send"
-
-# FCM message payload
 message = {
     "message": {
         "topic": TOPIC,
@@ -76,18 +70,18 @@ message = {
         }
     }
 }
-
-# Send notification
 headers = {
     "Authorization": f"Bearer {credentials.token}",
     "Content-Type": "application/json; UTF-8",
 }
-response = requests.post(url, headers=headers, json=message)
 
+response = requests.post(url, headers=headers, json=message)
 print("🔔 Notification sent:", response.status_code, response.text)
 
-# ✅ Save the new post ID and timestamp after sending the notification
-with open("last_post_id.txt", "w") as f:
-    f.write(str(post_id))
-with open("last_post_timestamp.txt", "w") as f:
-    f.write(post_timestamp.isoformat())
+# Save the new state to the JSON file
+state["last_id"] = post_id
+state["last_timestamp"] = post_timestamp.isoformat()
+with open(STATE_FILE, "w") as f:
+    json.dump(state, f)
+
+print(f"✅ State saved to {STATE_FILE}")
